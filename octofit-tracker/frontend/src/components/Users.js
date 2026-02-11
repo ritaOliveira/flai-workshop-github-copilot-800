@@ -44,7 +44,8 @@ function Users() {
 
   return (
     <div className="container mt-4">
-      <h2>Users</h2>
+      <h2><i className="bi bi-person-badge-fill"></i> Users</h2>
+      <p className="lead">All registered superhero members</p>
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="table-dark">

@@ -44,7 +44,8 @@ function Workouts() {
 
   return (
     <div className="container mt-4">
-      <h2>Workouts</h2>
+      <h2><i className="bi bi-heart-pulse-fill"></i> Workouts</h2>
+      <p className="lead">Recommended workout plans for every hero</p>
       <div className="row">
         {workouts.length > 0 ? (
           workouts.map((workout) => (

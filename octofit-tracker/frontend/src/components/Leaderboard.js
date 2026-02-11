@@ -44,7 +44,8 @@ function Leaderboard() {
 
   return (
     <div className="container mt-4">
-      <h2>Leaderboard</h2>
+      <h2><i className="bi bi-trophy-fill"></i> Leaderboard</h2>
+      <p className="lead">Top performers ranked by total calories burned</p>
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="table-dark">

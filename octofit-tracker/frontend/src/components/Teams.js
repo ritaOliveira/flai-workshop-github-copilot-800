@@ -44,7 +44,8 @@ function Teams() {
 
   return (
     <div className="container mt-4">
-      <h2>Teams</h2>
+      <h2><i className="bi bi-people-fill"></i> Teams</h2>
+      <p className="lead">Superhero fitness teams competing for glory</p>
       <div className="row">
         {teams.length > 0 ? (
           teams.map((team) => (

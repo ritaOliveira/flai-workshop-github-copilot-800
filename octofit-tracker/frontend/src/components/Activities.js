@@ -44,7 +44,8 @@ function Activities() {
 
   return (
     <div className="container mt-4">
-      <h2>Activities</h2>
+      <h2><i className="bi bi-activity"></i> Activities</h2>
+      <p className="lead">Track all superhero fitness activities</p>
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="table-dark">
