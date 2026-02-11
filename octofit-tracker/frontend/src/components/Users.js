@@ -51,6 +51,7 @@ function Users() {
           <thead className="table-dark">
             <tr>
               <th>Name</th>
+              <th>Username</th>
               <th>Email</th>
               <th>Team ID</th>
               <th>Created At</th>
@@ -60,7 +61,8 @@ function Users() {
             {users.length > 0 ? (
               users.map((user) => (
                 <tr key={user.id}>
-                  <td>{user.name}</td>
+                  <td><strong>{user.name}</strong></td>
+                  <td>@{user.email ? user.email.split('@')[0] : 'N/A'}</td>
                   <td>{user.email}</td>
                   <td>{user.team_id}</td>
                   <td>{new Date(user.created_at).toLocaleDateString()}</td>
@@ -68,7 +70,7 @@ function Users() {
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="text-center">No users found</td>
+                <td colSpan="5" className="text-center">No users found</td>
               </tr>
             )}
           </tbody>
