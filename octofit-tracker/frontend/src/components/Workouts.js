@@ -51,14 +51,14 @@ function Workouts() {
           workouts.map((workout) => (
             <div key={workout.id} className="col-md-6 mb-4">
               <div className="card h-100">
-                <div className="card-header bg-success text-white">
+                <div className="card-header bg-primary text-white">
                   <h5 className="card-title mb-0">{workout.name}</h5>
                 </div>
                 <div className="card-body">
                   <p className="card-text">{workout.description}</p>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item"><strong>Category:</strong> {workout.category}</li>
-                    <li className="list-group-item"><strong>Difficulty:</strong> <span className="badge bg-warning text-dark">{workout.difficulty}</span></li>
+                    <li className="list-group-item"><strong>Difficulty:</strong> <span className="badge bg-primary">{workout.difficulty}</span></li>
                     <li className="list-group-item"><strong>Duration:</strong> {workout.duration} minutes</li>
                     <li className="list-group-item"><strong>Calories:</strong> {workout.calories_per_session} per session</li>
                   </ul>

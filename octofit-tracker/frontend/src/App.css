@@ -281,36 +281,6 @@ body {
   color: white;
 }
 
-.btn-success {
-  background: linear-gradient(135deg, #34c759 0%, #2da94c 100%);
-  color: white;
-}
-
-.btn-success:hover {
-  background: linear-gradient(135deg, #2da94c 0%, #258a3e 100%);
-  color: white;
-}
-
-.btn-warning {
-  background: linear-gradient(135deg, #ff9500 0%, #e08600 100%);
-  color: white;
-}
-
-.btn-warning:hover {
-  background: linear-gradient(135deg, #e08600 0%, #c27500 100%);
-  color: white;
-}
-
-.btn-info {
-  background: linear-gradient(135deg, #5ac8fa 0%, #32aee8 100%);
-  color: white;
-}
-
-.btn-info:hover {
-  background: linear-gradient(135deg, #32aee8 0%, #1a9ad6 100%);
-  color: white;
-}
-
 .btn-danger {
   background: linear-gradient(135deg, #ff3b30 0%, #e6312a 100%);
   color: white;
@@ -335,21 +305,8 @@ body {
   background: linear-gradient(135deg, #007aff 0%, #0051d5 100%) !important;
 }
 
-.bg-success {
-  background: linear-gradient(135deg, #34c759 0%, #2da94c 100%) !important;
-}
-
-.bg-warning {
-  background: linear-gradient(135deg, #ff9500 0%, #e08600 100%) !important;
-  color: white !important;
-}
-
 .bg-danger {
   background: linear-gradient(135deg, #ff3b30 0%, #e6312a 100%) !important;
-}
-
-.bg-info {
-  background: linear-gradient(135deg, #5ac8fa 0%, #32aee8 100%) !important;
 }
 
 /* Headings - iOS Typography */

@@ -72,7 +72,7 @@ function Teams() {
                 <div className="card-body">
                   <p className="card-text">{team.description}</p>
                   <div className="mb-2">
-                    <span className="badge bg-info">
+                    <span className="badge bg-primary">
                       {getMemberCount(team.id)} Members
                     </span>
                   </div>

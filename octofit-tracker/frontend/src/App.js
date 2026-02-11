@@ -110,7 +110,7 @@ function Home() {
                 <div className="card-body">
                   <h5 className="card-title">💪 Workouts</h5>
                   <p className="card-text">Browse workout plans</p>
-                  <span className="btn btn-success">View Workouts</span>
+                  <span className="btn btn-primary">View Workouts</span>
                 </div>
               </div>
             </Link>
@@ -121,7 +121,7 @@ function Home() {
                 <div className="card-body">
                   <h5 className="card-title">🏆 Leaderboard</h5>
                   <p className="card-text">Check team rankings</p>
-                  <span className="btn btn-warning">View Leaderboard</span>
+                  <span className="btn btn-primary">View Leaderboard</span>
                 </div>
               </div>
             </Link>
