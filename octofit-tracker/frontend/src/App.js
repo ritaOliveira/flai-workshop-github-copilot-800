@@ -72,49 +72,59 @@ function Home() {
         <p>Navigate through the menu to explore:</p>
         <div className="row mt-4">
           <div className="col-md-4 mb-3">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">👥 Teams</h5>
-                <p className="card-text">View Team Marvel and Team DC</p>
-                <Link to="/teams" className="btn btn-primary">View Teams</Link>
+            <Link to="/teams" style={{ textDecoration: 'none' }}>
+              <div className="card" style={{ cursor: 'pointer' }}>
+                <div className="card-body">
+                  <h5 className="card-title">👥 Teams</h5>
+                  <p className="card-text">View Team Marvel and Team DC</p>
+                  <span className="btn btn-primary">View Teams</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="col-md-4 mb-3">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">🦸 Users</h5>
-                <p className="card-text">See all superhero members</p>
-                <Link to="/users" className="btn btn-primary">View Users</Link>
+            <Link to="/users" style={{ textDecoration: 'none' }}>
+              <div className="card" style={{ cursor: 'pointer' }}>
+                <div className="card-body">
+                  <h5 className="card-title">🦸 Users</h5>
+                  <p className="card-text">See all superhero members</p>
+                  <span className="btn btn-primary">View Users</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="col-md-4 mb-3">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">🏃 Activities</h5>
-                <p className="card-text">Track fitness activities</p>
-                <Link to="/activities" className="btn btn-primary">View Activities</Link>
+            <Link to="/activities" style={{ textDecoration: 'none' }}>
+              <div className="card" style={{ cursor: 'pointer' }}>
+                <div className="card-body">
+                  <h5 className="card-title">🏃 Activities</h5>
+                  <p className="card-text">Track fitness activities</p>
+                  <span className="btn btn-primary">View Activities</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="col-md-4 mb-3">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">💪 Workouts</h5>
-                <p className="card-text">Browse workout plans</p>
-                <Link to="/workouts" className="btn btn-success">View Workouts</Link>
+            <Link to="/workouts" style={{ textDecoration: 'none' }}>
+              <div className="card" style={{ cursor: 'pointer' }}>
+                <div className="card-body">
+                  <h5 className="card-title">💪 Workouts</h5>
+                  <p className="card-text">Browse workout plans</p>
+                  <span className="btn btn-success">View Workouts</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="col-md-4 mb-3">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">🏆 Leaderboard</h5>
-                <p className="card-text">Check team rankings</p>
-                <Link to="/leaderboard" className="btn btn-warning">View Leaderboard</Link>
+            <Link to="/leaderboard" style={{ textDecoration: 'none' }}>
+              <div className="card" style={{ cursor: 'pointer' }}>
+                <div className="card-body">
+                  <h5 className="card-title">🏆 Leaderboard</h5>
+                  <p className="card-text">Check team rankings</p>
+                  <span className="btn btn-warning">View Leaderboard</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

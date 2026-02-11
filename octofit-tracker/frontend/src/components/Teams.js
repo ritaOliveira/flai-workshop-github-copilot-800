@@ -2,42 +2,57 @@ import React, { useState, useEffect } from 'react';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTeams = async () => {
+    const fetchData = async () => {
       try {
         const codespace = process.env.REACT_APP_CODESPACE_NAME;
-        const apiUrl = codespace 
-          ? `https://${codespace}-8000.app.github.dev/api/teams/`
-          : 'http://localhost:8000/api/teams/';
+        const baseUrl = codespace 
+          ? `https://${codespace}-8000.app.github.dev/api`
+          : 'http://localhost:8000/api';
         
-        console.log('Fetching teams from:', apiUrl);
+        console.log('Fetching teams and users from:', baseUrl);
         
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        // Fetch both teams and users
+        const [teamsResponse, usersResponse] = await Promise.all([
+          fetch(`${baseUrl}/teams/`),
+          fetch(`${baseUrl}/users/`)
+        ]);
+        
+        if (!teamsResponse.ok || !usersResponse.ok) {
+          throw new Error('HTTP error! Failed to fetch data');
         }
         
-        const data = await response.json();
-        console.log('Teams data received:', data);
+        const teamsData = await teamsResponse.json();
+        const usersData = await usersResponse.json();
+        
+        console.log('Teams data received:', teamsData);
+        console.log('Users data received:', usersData);
         
         // Handle both paginated (.results) and plain array responses
-        const teamsData = data.results || data;
-        console.log('Processed teams:', teamsData);
+        const processedTeams = teamsData.results || teamsData;
+        const processedUsers = usersData.results || usersData;
         
-        setTeams(Array.isArray(teamsData) ? teamsData : []);
+        setTeams(Array.isArray(processedTeams) ? processedTeams : []);
+        setUsers(Array.isArray(processedUsers) ? processedUsers : []);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching teams:', err);
+        console.error('Error fetching data:', err);
         setError(err.message);
         setLoading(false);
       }
     };
 
-    fetchTeams();
+    fetchData();
   }, []);
+
+  // Count members for a team
+  const getMemberCount = (teamId) => {
+    return users.filter(user => user.team_id === teamId).length;
+  };
 
   if (loading) return <div className="container mt-4"><div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div></div>;
   if (error) return <div className="container mt-4"><div className="alert alert-danger">Error: {error}</div></div>;
@@ -56,6 +71,11 @@ function Teams() {
                 </div>
                 <div className="card-body">
                   <p className="card-text">{team.description}</p>
+                  <div className="mb-2">
+                    <span className="badge bg-info">
+                      {getMemberCount(team.id)} Members
+                    </span>
+                  </div>
                   <p className="text-muted small">Created: {new Date(team.created_at).toLocaleDateString()}</p>
                 </div>
               </div>

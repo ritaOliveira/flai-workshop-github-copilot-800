@@ -2,42 +2,70 @@ import React, { useState, useEffect } from 'react';
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchLeaderboard = async () => {
+    const fetchData = async () => {
       try {
         const codespace = process.env.REACT_APP_CODESPACE_NAME;
-        const apiUrl = codespace 
-          ? `https://${codespace}-8000.app.github.dev/api/leaderboard/`
-          : 'http://localhost:8000/api/leaderboard/';
+        const baseUrl = codespace 
+          ? `https://${codespace}-8000.app.github.dev/api`
+          : 'http://localhost:8000/api';
         
-        console.log('Fetching leaderboard from:', apiUrl);
+        console.log('Fetching leaderboard, users, and teams from:', baseUrl);
         
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        // Fetch all data
+        const [leaderboardResponse, usersResponse, teamsResponse] = await Promise.all([
+          fetch(`${baseUrl}/leaderboard/`),
+          fetch(`${baseUrl}/users/`),
+          fetch(`${baseUrl}/teams/`)
+        ]);
+        
+        if (!leaderboardResponse.ok || !usersResponse.ok || !teamsResponse.ok) {
+          throw new Error('HTTP error! Failed to fetch data');
         }
         
-        const data = await response.json();
-        console.log('Leaderboard data received:', data);
+        const leaderboardData = await leaderboardResponse.json();
+        const usersData = await usersResponse.json();
+        const teamsData = await teamsResponse.json();
+        
+        console.log('Leaderboard data received:', leaderboardData);
+        console.log('Users data received:', usersData);
+        console.log('Teams data received:', teamsData);
         
         // Handle both paginated (.results) and plain array responses
-        const leaderboardData = data.results || data;
-        console.log('Processed leaderboard:', leaderboardData);
+        const processedLeaderboard = leaderboardData.results || leaderboardData;
+        const processedUsers = usersData.results || usersData;
+        const processedTeams = teamsData.results || teamsData;
         
-        setLeaderboard(Array.isArray(leaderboardData) ? leaderboardData : []);
+        setLeaderboard(Array.isArray(processedLeaderboard) ? processedLeaderboard : []);
+        setUsers(Array.isArray(processedUsers) ? processedUsers : []);
+        setTeams(Array.isArray(processedTeams) ? processedTeams : []);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching leaderboard:', err);
+        console.error('Error fetching data:', err);
         setError(err.message);
         setLoading(false);
       }
     };
 
-    fetchLeaderboard();
+    fetchData();
   }, []);
+
+  // Get user name by user_id
+  const getUserName = (userId) => {
+    const user = users.find(u => u.id === userId);
+    return user ? user.name : 'Unknown User';
+  };
+
+  // Get team name by team_id
+  const getTeamName = (teamId) => {
+    const team = teams.find(t => t.id === teamId);
+    return team ? team.name : 'N/A';
+  };
 
   if (loading) return <div className="container mt-4"><div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div></div>;
   if (error) return <div className="container mt-4"><div className="alert alert-danger">Error: {error}</div></div>;
@@ -51,8 +79,8 @@ function Leaderboard() {
           <thead className="table-dark">
             <tr>
               <th>Rank</th>
-              <th>User ID</th>
-              <th>Team ID</th>
+              <th>User</th>
+              <th>Team</th>
               <th>Total Calories</th>
               <th>Total Activities</th>
             </tr>
@@ -61,11 +89,11 @@ function Leaderboard() {
             {leaderboard.length > 0 ? (
               leaderboard.map((entry) => (
                 <tr key={entry.id}>
-                  <td><span className="badge bg-primary">{entry.rank}</span></td>
-                  <td>{entry.user_id}</td>
-                  <td>{entry.team_id}</td>
-                  <td>{entry.total_calories}</td>
-                  <td>{entry.total_activities}</td>
+                  <td><span className="badge bg-primary">#{entry.rank}</span></td>
+                  <td><strong>{getUserName(entry.user_id)}</strong></td>
+                  <td>{getTeamName(entry.team_id)}</td>
+                  <td><span className="badge bg-warning">{entry.total_calories || 0} cal</span></td>
+                  <td>{entry.total_activities || 0}</td>
                 </tr>
               ))
             ) : (
