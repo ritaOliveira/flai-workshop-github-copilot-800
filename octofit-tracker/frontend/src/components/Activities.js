@@ -59,15 +59,21 @@ function Activities() {
           </thead>
           <tbody>
             {activities.length > 0 ? (
-              activities.map((activity) => (
-                <tr key={activity.id}>
-                  <td>{activity.activity_type}</td>
-                  <td>{activity.duration}</td>
-                  <td>{activity.calories_burned}</td>
-                  <td>{activity.distance || 'N/A'}</td>
-                  <td>{new Date(activity.date).toLocaleDateString()}</td>
-                </tr>
-              ))
+              activities.map((activity) => {
+                // Parse date string (YYYY-MM-DD) to avoid timezone issues
+                const dateStr = activity.date;
+                const formattedDate = dateStr ? new Date(dateStr + 'T00:00:00').toLocaleDateString() : 'N/A';
+                
+                return (
+                  <tr key={activity.id}>
+                    <td>{activity.activity_type}</td>
+                    <td>{activity.duration}</td>
+                    <td>{activity.calories_burned}</td>
+                    <td>{activity.distance || 'N/A'}</td>
+                    <td>{formattedDate}</td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="5" className="text-center">No activities found</td>
